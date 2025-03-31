@@ -1,8 +1,7 @@
-# tests/test_main.py
 from fastapi.testclient import TestClient
-from src.main import app  # Ensure 'src' is a valid module
+from src.main import app  # Ensure this correctly imports your FastAPI app
 
-client = TestClient(app)
+client = TestClient(app)  # This should work
 
 def test_webhook():
     response = client.post("/webhook", json={"test": "data"})
