@@ -59,7 +59,7 @@ jobs:
       - name: Run OWASP ZAP scan
         uses: zaproxy/action-baseline@v0.6.1
         with:
-          docker_name: 'owasp/zap2docker-stable'
+          docker_name: 'owasp/zap-stable'
           target: http://localhost:8000
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
