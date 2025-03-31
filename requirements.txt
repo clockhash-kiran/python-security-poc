@@ -1,4 +1,4 @@
-fastapi[all]==0.95.0
+fastapi[all]==0.115.6
 pytest
 httpx
 gunicorn
