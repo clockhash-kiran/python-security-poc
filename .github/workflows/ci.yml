@@ -56,9 +56,14 @@ jobs:
           uvicorn src.main:app --host 0.0.0.0 --port 8000 &
           sleep 10  # Wait for API to start
 
-      - name: Run OWASP ZAP Scan
-        run: |
-          docker run --rm -v $(pwd):/zap/wrk:rw -t owasp/zap2docker-weekly:latest zap-baseline.py -t http://localhost:8000 -g gen.conf -r zap-report.html
+      - name: Run OWASP ZAP scan
+        uses: zaproxy/action-baseline@v0.6.1
+        with:
+          docker_name: 'owasp/zap2docker-stable'
+          target: http://localhost:8000
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a'
+
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
         with:
