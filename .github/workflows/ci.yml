@@ -62,7 +62,7 @@ jobs:
       - name: Run OWASP ZAP scan
         uses: zaproxy/action-baseline@v0.6.1
         with:
-          docker_name: 'ghcr.io/owasp/zap2docker-stable'  # Use GHCR instead of Docker Hub
+          docker_name: 'owasp/zap2docker-stable'
           target: http://localhost:8000
           cmd_options: '-a'
 
