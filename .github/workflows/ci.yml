@@ -64,7 +64,6 @@ jobs:
         with:
           docker_name: 'ghcr.io/owasp/zap2docker-stable'  # Use GHCR instead of Docker Hub
           target: http://localhost:8000
-          rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
 
       - name: Upload ZAP Report
