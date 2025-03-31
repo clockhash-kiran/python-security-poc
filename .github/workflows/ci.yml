@@ -22,3 +22,27 @@ jobs:
 
       - name: Run Tests
         run: pytest tests/
+
+      - name: Run Trivy (SCA Analysis)
+        run: trivy fs --exit-code 0 --no-progress .
+
+      - name: Run Semgrep (SAST)
+        run: semgrep --config=auto .
+
+  dast:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Start FastAPI App
+        run: |
+          uvicorn src.main:app --host 0.0.0.0 --port 8000 &
+
+      - name: Run OWASP ZAP Scan
+        run: |
+          docker run --rm -v $(pwd):/zap/wrk:rw -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8000 -g gen.conf -r zap-report.html
+
+      - name: Upload ZAP Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: ZAP Report
+          path: zap-report.html

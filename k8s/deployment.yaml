@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-security-poc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: security-poc
+  template:
+    metadata:
+      labels:
+        app: security-poc
+    spec:
+      containers:
+        - name: app
+          image: YOUR_DOCKER_HUB/python-security-poc:latest
+          ports:
+            - containerPort: 8000

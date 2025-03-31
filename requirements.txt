@@ -3,4 +3,3 @@ pytest
 httpx
 gunicorn
 semgrep
-trivy
