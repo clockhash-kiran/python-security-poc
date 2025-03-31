@@ -1,0 +1,6 @@
+fastapi[all]==0.95.0
+pytest
+httpx
+gunicorn
+semgrep
+trivy
